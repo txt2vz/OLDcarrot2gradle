@@ -77,8 +77,12 @@ public class ClusterCarrot2KM
 		final Map<String, Object> luceneGlobalAttributes = new HashMap<String, Object>();
 
 		String indexPath = 
-		//"indexes/classic4"
-		"indexes/classic4_500"
+	//	"indexes/classic3L5"
+	//	"indexes/classic4_500"
+	//	'indexes/20NG3ChristianHockeySpace'
+		'indexes/20NG6GraphicsHockeyCryptSpaceChristianGuns'
+	//	'indexes/20NG3SpaceHockeyChristianL5'
+		//"indexes/20NG6GraphicsHockeyCryptSpaceChristianGunsL5"
 		
 		//"C:\\Users\\Laurie\\Java\\indexes2\\classic4" ;
 	//	 /C:\Users\Laurie\git\ClusterGA\ClusterGA\indexes\classic4_500/
@@ -148,7 +152,7 @@ public class ClusterCarrot2KM
 	
 		processingAttributes.put("TermDocumentMatrixBuilder.titleWordsBoost", (double) 0.0);
 	//	processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4); 	
-		processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4);
+		processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 6);
 		
 
 
