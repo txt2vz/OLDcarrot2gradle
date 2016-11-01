@@ -76,20 +76,10 @@ public class ClusterCarrot2KM
 		 */
 		final Map<String, Object> luceneGlobalAttributes = new HashMap<String, Object>();
 
-		String indexPath = 
-	//	"indexes/classic3L5"
-	//	"indexes/classic4_500"
-	//	'indexes/20NG3ChristianHockeySpace'
-		'indexes/20NG6GraphicsHockeyCryptSpaceChristianGuns'
-	//	'indexes/20NG3SpaceHockeyChristianL5'
-		//"indexes/20NG6GraphicsHockeyCryptSpaceChristianGunsL5"
-		
-		//"C:\\Users\\Laurie\\Java\\indexes2\\classic4" ;
-	//	 /C:\Users\Laurie\git\ClusterGA\ClusterGA\indexes\classic4_500/
-	//	/C:\Users\Laurie\git\ClusterGA\ClusterGA\indexes\reut8/
-	//    /C:\Users\Laurie\git\ClusterGA\ClusterGA\indexes\20NG3SpaceHockeyChristian/
-	  
-//	  /C:\Users\laurie\Java\indexes2\classic4_500Carrot2/
+		String indexPath =
+			//	'indexes/crisis3FireBombFloodL5'
+			// 'indexes/20NG6GraphicsHockeyCryptSpaceChristianGunsL5'
+		   'indexes/classic4_500L5'
 
 		// Sanity check.
 		if (!new File(indexPath).isDirectory()) {
@@ -98,8 +88,8 @@ public class ClusterCarrot2KM
 		}
 
 		LuceneDocumentSourceDescriptor
-			.attributeBuilder(luceneGlobalAttributes)
-			.directory(FSDirectory.open(Paths.get(indexPath)));
+				.attributeBuilder(luceneGlobalAttributes)
+				.directory(FSDirectory.open(Paths.get(indexPath)));
 
 		/*
 		 * In ClusteringDataFromLucene we used a simple configuration of
@@ -119,16 +109,16 @@ public class ClusterCarrot2KM
 		 *   which means the implementation MUST be thread-safe.
 		 */
 		LuceneDocumentSourceDescriptor
-			.attributeBuilder(luceneGlobalAttributes)
-			.fieldMapper(new CustomFieldMapper());
+				.attributeBuilder(luceneGlobalAttributes)
+				.fieldMapper(new CustomFieldMapper());
 
 		/*
 		 * The Analyzer used by Lucene while searching can also be provided via factory
 		 * because it does not have a parameterless constructor.
 		 */
 		LuceneDocumentSourceDescriptor
-			.attributeBuilder(luceneGlobalAttributes)	
-			.analyzer(StandardAnalyzerFactory.class);
+				.attributeBuilder(luceneGlobalAttributes)
+				.analyzer(StandardAnalyzerFactory.class);
 
 		/*
 		 * Initialize the controller passing the above attributes as component-specific
@@ -137,8 +127,8 @@ public class ClusterCarrot2KM
 		 * this identifier when performing processing.
 		 */
 		controller.init(
-			new HashMap<String, Object>(),
-			new ProcessingComponentConfiguration(
+				new HashMap<String, Object>(),
+				new ProcessingComponentConfiguration(
 				LuceneDocumentSource.class, "lucene", luceneGlobalAttributes));
 
 		/*
@@ -147,14 +137,12 @@ public class ClusterCarrot2KM
 		final String query = "*:*";
 		final Map<String, Object> processingAttributes = Maps.newHashMap();
 		CommonAttributesDescriptor.attributeBuilder(processingAttributes)
-			.query(query);
+				.query(query);
 		processingAttributes.put(CommonAttributesDescriptor.Keys.RESULTS, 5000);
-	
-		processingAttributes.put("TermDocumentMatrixBuilder.titleWordsBoost", (double) 0.0);
-	//	processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4); 	
-		processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 6);
-		
 
+		processingAttributes.put("TermDocumentMatrixBuilder.titleWordsBoost", (double) 0.0);
+		//	processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4);
+		processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4);
 
 		/*
 		 * We need to refer to the Lucene component by its identifier we set during
@@ -162,13 +150,13 @@ public class ClusterCarrot2KM
 		 * LingoClusteringAlgorithm we want to use, we can its fully qualified class name.
 		 */
 		ProcessingResult process = controller.process(
-	 //       processingAttributes, "lucene", LingoClusteringAlgorithm.class.getName());
-		processingAttributes, "lucene", BisectingKMeansClusteringAlgorithm.class.getName());
+				//       processingAttributes, "lucene", LingoClusteringAlgorithm.class.getName());
+				processingAttributes, "lucene", BisectingKMeansClusteringAlgorithm.class.getName());
 
 		//ConsoleFormatter.displayResults(process);
 		Results.displayResults(process);
 	}
-	
+
 	/**
 	 * A wrapper class producing {@link StandardAnalyzer} instances.
 	 */
@@ -188,31 +176,31 @@ public class ClusterCarrot2KM
 	public static final class CustomFieldMapper implements IFieldMapper
 	{
 		public void map(Query luceneQuery, Analyzer analyzer, Document luceneDoc,
-			org.carrot2.core.Document carrot2Doc)
+				org.carrot2.core.Document carrot2Doc)
 		{
 			/*
 			 * Here we need to transfer the desired content from the provided Lucene
 			 * document to the provided Carrot2 document.
 			 */
-		   // carrot2Doc.setContentUrl(luceneDoc.get("contents"));
+			// carrot2Doc.setContentUrl(luceneDoc.get("contents"));
 			carrot2Doc.setTitle(luceneDoc.get("path"));
 			carrot2Doc.setField("category", luceneDoc.get("category"));
-	
-			
+
+
 			carrot2Doc.setField("contents", luceneDoc.get("contents"));
-			
+
 			carrot2Doc.setLanguage(LanguageCode.ENGLISH);
 			//carrot2Doc.setField("fullContent", luceneDoc.get("fullContent"));
 			carrot2Doc.setField("fullContent", luceneDoc.get("contents"));
-			
-	      	carrot2Doc.setSummary(luceneDoc.get("contents"));
-		
-				//carrot2Doc.setField("category", luceneDoc.get("rating"));
-//
-   //         carrot2Doc.setContentUrl(luceneDoc.get("contents"));
-//            carrot2Doc.setTitle(luceneDoc.get("title"));
-//            carrot2Doc.setSummary(luceneDoc.get("snippet"));
-//            carrot2Doc.setField("category", luceneDoc.get("rating"));
+
+			carrot2Doc.setSummary(luceneDoc.get("contents"));
+
+			//carrot2Doc.setField("category", luceneDoc.get("rating"));
+			//
+			//         carrot2Doc.setContentUrl(luceneDoc.get("contents"));
+			//            carrot2Doc.setTitle(luceneDoc.get("title"));
+			//            carrot2Doc.setSummary(luceneDoc.get("snippet"));
+			//            carrot2Doc.setField("category", luceneDoc.get("rating"));
 		}
 
 		public String [] getSearchFields()
@@ -222,12 +210,12 @@ public class ClusterCarrot2KM
 			 * Note that these fields don't necessarily have to be the same as the fields
 			 * used in the map() method.
 			 */
-			 String[] s = ["fullContent", "contents"] as String[]
-			 return s
-//			return new String []
-//			{
-//				"contents"//"fullContent"
-//			};
+			String[] s = ["fullContent", "contents"] as String[]
+			return s
+			//			return new String []
+			//			{
+			//				"contents"//"fullContent"
+			//			};
 		}
 	}
 }
