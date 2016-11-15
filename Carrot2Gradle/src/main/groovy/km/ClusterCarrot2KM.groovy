@@ -77,9 +77,11 @@ public class ClusterCarrot2KM
 		final Map<String, Object> luceneGlobalAttributes = new HashMap<String, Object>();
 
 		String indexPath =
-			//	'indexes/crisis3FireBombFloodL5'
+				'indexes/crisis3FireBombFloodL5'
 			// 'indexes/20NG6GraphicsHockeyCryptSpaceChristianGunsL5'
-		   'indexes/classic4_500L5'
+		 //  'indexes/classic4_500L5'
+	//	'indexes/20NG3SpaceHockeyChristianL5'
+	//	 'indexes/20NG5WindowsmiscForsaleHockeySpaceChristianL5' 
 
 		// Sanity check.
 		if (!new File(indexPath).isDirectory()) {
@@ -142,7 +144,7 @@ public class ClusterCarrot2KM
 
 		processingAttributes.put("TermDocumentMatrixBuilder.titleWordsBoost", (double) 0.0);
 		//	processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4);
-		processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 4);
+		processingAttributes.put("BisectingKMeansClusteringAlgorithm.clusterCount", 3);
 
 		/*
 		 * We need to refer to the Lucene component by its identifier we set during
