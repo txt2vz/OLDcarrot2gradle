@@ -36,7 +36,7 @@ class Index20NG {
 	
 	// Index files in this directory	
 	def docsPath =
-	 /C:\Users\Laurie\Dataset\20NG6GraphicsHockeyCryptSpaceChristianGuns/	
+	 /C:\Users\Laurie\Dataset\20NG6GraphicsHockeyCryptSpaceChristianGuns/
 	// /C:\Users\Laurie\Dataset\20NG3TestSpaceHockeyChristian/
 //	/C:\Users\Laurie\Dataset\20NG5WindowsMotorcyclesSpaceMedMideast/
 //	/C:\Users\Laurie\Dataset\20NG5macForsaleCryptMideast/
