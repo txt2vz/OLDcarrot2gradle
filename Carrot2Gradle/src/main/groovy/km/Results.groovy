@@ -168,7 +168,7 @@ public class Results {
 		// indent up to level and display this cluster's description phrase
 		for (int i = 0; i < level; i++)
 		{
-			System.out.print("  ");
+			System.out.print("   ");
 		}
 		System.out.println(label + "  "
 				+ clusterDetailsFormatter.formatClusterDetails(cluster));
